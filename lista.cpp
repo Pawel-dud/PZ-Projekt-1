@@ -135,6 +135,18 @@ class metody
             licznik--;
         }
     }
+
+     void pokaz_liste() 
+     {
+        elementy *p = poczatek;
+        while (p) 
+        {
+            cout << p->id << " ";
+            p = p->nastepny;
+        }
+        cout << endl;
+    }
+
 };
 
 
