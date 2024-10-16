@@ -156,6 +156,20 @@ class metody
         cout << endl;
     }
 
+    void pokaz_nastepny(elementy *p) {
+        if (p && p->nastepny) {
+            cout << "Następny element: " << p->nastepny->id << endl;
+        } else {
+            cout << "Brak następnego elementu." << endl;
+        }
+    }
+
+    void pokaz_poprzedni(elementy *p) {
+        if (p && p->poprzedni) {
+            cout << "Poprzedni element: " << p->poprzedni->id << endl;
+        } else {
+            cout << "Brak poprzedniego elementu." << endl;
+        }
 };
 
 
