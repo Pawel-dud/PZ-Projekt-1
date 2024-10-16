@@ -99,6 +99,24 @@ class metody
             licznik++;
         }
     }
+
+    void usun_z_poczatku() 
+    {
+        if (poczatek) 
+        {
+            elementy *p = poczatek;
+            poczatek = poczatek->nastepny;
+            if (poczatek) 
+            {
+                poczatek->poprzedni = NULL;
+            } else 
+            {
+                koniec = NULL;
+            }
+            delete p;
+            licznik--;
+        }
+    }
 };
 
 
