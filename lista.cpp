@@ -156,25 +156,52 @@ class metody
         cout << endl;
     }
 
-    void pokaz_nastepny(elementy *p) {
-        if (p && p->nastepny) {
+    void pokaz_nastepny(elementy *p) 
+    {
+        if (p && p->nastepny) 
+        {
             cout << "Następny element: " << p->nastepny->id << endl;
-        } else {
+        } else 
+        {
             cout << "Brak następnego elementu." << endl;
         }
     }
 
-    void pokaz_poprzedni(elementy *p) {
-        if (p && p->poprzedni) {
+    void pokaz_poprzedni(elementy *p) 
+    {
+        if (p && p->poprzedni) 
+        {
             cout << "Poprzedni element: " << p->poprzedni->id << endl;
-        } else {
+        } else 
+        {
             cout << "Brak poprzedniego elementu." << endl;
         }
+    }
+
+     void czyszczenie() 
+     {
+        while (poczatek) 
+        {
+            usun_z_poczatku();
+        }
+     }
 };
 
 
 
-int main() {
- cout<<"Hello";
+int main() 
+{
+    metody m;
+    m.dodaj_na_poczatek(2);
+    m.dodaj_na_koniec(8);
+    m.dodaj_na_koniec(5);
+    m.dodaj_pod_indeks(2, 1);
 
+    cout << "Lista: ";
+    m.pokaz_liste();
+
+    cout<< "Lista w odwrotnej kolejnosci: ";
+    m.pokaz_liste_w_odwrotnej_kolejnosci();
+
+    
 }
