@@ -117,6 +117,24 @@ class metody
             licznik--;
         }
     }
+
+    void usun_z_konca()
+    {
+        if (koniec) 
+        {
+            elementy *p = koniec;
+            koniec = koniec->poprzedni;
+            if (koniec) 
+            {
+                koniec->nastepny = NULL;
+            } else 
+            {
+                poczatek = NULL;
+            }
+            delete p;
+            licznik--;
+        }
+    }
 };
 
 
