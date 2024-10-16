@@ -147,6 +147,15 @@ class metody
         cout << endl;
     }
 
+     void pokaz_liste_w_odwrotnej_kolejnosci() {
+        elementy *p = koniec;
+        while (p) {
+            cout << p->id << " ";
+            p = p->poprzedni;
+        }
+        cout << endl;
+    }
+
 };
 
 
