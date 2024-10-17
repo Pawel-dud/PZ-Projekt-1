@@ -26,6 +26,11 @@ class metody
         czyszczenie();
     }
 
+    elementy* pokaz_poczatek()
+     {
+        return poczatek;
+     }
+
     void dodaj_na_poczatek(int id) 
     {
         elementy *nowy = new elementy;
@@ -82,20 +87,15 @@ class metody
             nowy->id = id;
             elementy *p = poczatek;
 
-            for (unsigned i = 0; i < indeks - 1; i++) 
+            for (unsigned i = 0; i < indeks; i++) 
             {
                 p = p->nastepny;
             }
-            nowy->nastepny = p->nastepny;
-            nowy->poprzedni = p;
-            p->nastepny = nowy;
-            if (nowy->nastepny) 
-            {
-                nowy->nastepny->poprzedni = nowy;
-            } else 
-            {
-                koniec = nowy;
-            }
+            nowy->nastepny = p;
+            nowy->poprzedni = p->poprzedni;
+            p->poprzedni->nastepny = nowy;
+            p->poprzedni = nowy;
+
             licznik++;
         }
     }
@@ -134,6 +134,39 @@ class metody
             delete p;
             licznik--;
         }
+    }
+
+    void usun_z_indeksu(unsigned indeks) 
+    {
+        if (indeks < 1 || indeks > licznik) 
+        {
+            cout << "Indeks poza zakresem!" << endl;
+            return;
+        }
+        elementy *p = poczatek;
+        for (unsigned i = 1; i < indeks; i++) 
+        {
+            p = p->nastepny;
+        }
+
+        if (p->poprzedni) 
+        {
+            p->poprzedni->nastepny = p->nastepny;
+        } else 
+        {
+            poczatek = p->nastepny;
+        }
+
+        if (p->nastepny) 
+        {
+            p->nastepny->poprzedni = p->poprzedni;
+        } else 
+        {
+            koniec = p->poprzedni;
+        }
+
+        delete p;
+        licznik--;
     }
 
      void pokaz_liste() 
@@ -185,6 +218,7 @@ class metody
             usun_z_poczatku();
         }
      }
+
 };
 
 
@@ -195,13 +229,35 @@ int main()
     m.dodaj_na_poczatek(2);
     m.dodaj_na_koniec(8);
     m.dodaj_na_koniec(5);
-    m.dodaj_pod_indeks(2, 1);
+    m.dodaj_pod_indeks(3, 1);
 
-    cout << "Lista: ";
+    cout << "Lista: " << endl;
     m.pokaz_liste();
 
-    cout<< "Lista w odwrotnej kolejnosci: ";
+    cout<< "Lista w odwrotnej kolejnosci: " << endl;
     m.pokaz_liste_w_odwrotnej_kolejnosci();
 
-    
+    elementy *aktualny = m.pokaz_poczatek();
+    cout<< "Wyświetl następny element: " << endl;
+    m.pokaz_nastepny(aktualny);
+
+    cout << "Wyświetl poprzedni element: " << endl;
+    m.pokaz_poprzedni(aktualny);
+
+    m.usun_z_poczatku();
+    cout << "Po usunieciu z poczatku: " << endl;
+    m.pokaz_liste();
+
+    m.usun_z_konca();
+    cout << "Po usunieciu z konca: " << endl;
+    m.pokaz_liste();
+
+    m.usun_z_indeksu(1);
+    cout << "Po usunieciu z indksu 1: " << endl;
+    m.pokaz_liste();
+
+    m.czyszczenie();
+    cout << "Po czyszczeniu: " << endl;
+    m.pokaz_liste();
+
 }
