@@ -1,39 +1,53 @@
 #include <iostream>
 using namespace std;
 
-struct elementy
+/// @brief Definiuje element listy
+struct elementy     /**Struktura o nazwie elementy zawierająca nr.elementu i wskaźniki*/
 {
-    elementy *nastepny, *poprzedni;
-    int id;
+    ///Wskaźnik do następnego elementu
+    elementy *nastepny, 
+    ///Wskaźnik do porzedniego elementu
+    *poprzedni;
+    ///Wartość elementu
+    int id;     
 };
 
-class metody
+/// @brief Definiuje listę, zmienne i metody
+class metody    /**Klasa zarządzająca listą dwukierunkową*/
 {
     private:
+    /// @brief Tworzy wskaźniki "początek" i "koniec"
     elementy *poczatek, *koniec;
-    unsigned licznik;
+    /// @brief Licznik elemętów listy
+    unsigned licznik; 
 
     public:
-    metody()
+    /// @brief Konsturktor
+    metody()    
     {
         poczatek = NULL;
         koniec = NULL;
         licznik = 0;
     }
 
+    /// @brief Destruktor
     ~metody()
     {
+        ///Wywołuje metode czyszczenie()
         czyszczenie();
     }
 
+    ///Zwraca początek
     elementy* pokaz_poczatek()
      {
         return poczatek;
      }
 
+    /// @brief Dodaje element na początku listy
+    /// @param id - Wartość elementu
     void dodaj_na_poczatek(int id) 
     {
-        elementy *nowy = new elementy;
+        elementy *nowy = new elementy;  
         nowy->id = id;
         nowy->nastepny = poczatek;
         nowy->poprzedni = NULL;
@@ -49,7 +63,9 @@ class metody
         licznik++;
     }  
 
-    void dodaj_na_koniec(int id) 
+    /// @brief Dodaje element na koniec listy
+    /// @param id - Wartość elementu
+    void dodaj_na_koniec(int id)
     {
         elementy *nowy = new elementy;
         nowy->id = id;
@@ -67,7 +83,9 @@ class metody
         licznik++;
     }
 
-
+    /// @brief Dodaje element w wybranym miejcu po numerze indeksu
+    /// @param id - Wartość elementu
+    /// @param indeks - Indeks elementu
     void dodaj_pod_indeks(int id, unsigned indeks) 
     {
         if (indeks > licznik) 
@@ -100,6 +118,7 @@ class metody
         }
     }
 
+    /// @brief Usuwa pierwszy element listy
     void usun_z_poczatku() 
     {
         if (poczatek) 
@@ -118,7 +137,9 @@ class metody
         }
     }
 
-    void usun_z_konca()
+
+    /// @brief Usuwa ostatni element listy
+    void usun_z_konca()   
     {
         if (koniec) 
         {
@@ -136,7 +157,9 @@ class metody
         }
     }
 
-    void usun_z_indeksu(unsigned indeks) 
+    /// @brief Usuwa element z wybranego miejsca po numerze indeksu
+    /// @param indeks - Indeks
+    void usun_z_indeksu(unsigned indeks)    
     {
         if (indeks < 1 || indeks > licznik) 
         {
@@ -169,7 +192,8 @@ class metody
         licznik--;
     }
 
-     void pokaz_liste() 
+     /// @brief Wyświetla elementy listy od początku do końca
+     void pokaz_liste()
      {
         elementy *p = poczatek;
         while (p) 
@@ -180,7 +204,10 @@ class metody
         cout << endl;
     }
 
-     void pokaz_liste_w_odwrotnej_kolejnosci() {
+
+     /// @brief Wyświetla elementy listy od końca do początku
+     void pokaz_liste_w_odwrotnej_kolejnosci()      
+     {
         elementy *p = koniec;
         while (p) {
             cout << p->id << " ";
@@ -189,18 +216,23 @@ class metody
         cout << endl;
     }
 
-    void pokaz_nastepny(elementy *p) 
+    
+    /// @brief Wyświetla następny element dla danego wskaźnika
+    /// @param p - Indeks elementu
+    void pokaz_nastepny(elementy *p)   
     {
         if (p && p->nastepny) 
         {
-            cout << "Następny element: " << p->nastepny->id << endl;
+            cout << "Nastepny element: " << p->nastepny->id << endl;
         } else 
         {
-            cout << "Brak następnego elementu." << endl;
+            cout << "Brak nastepnego elementu." << endl;
         }
     }
 
-    void pokaz_poprzedni(elementy *p) 
+    /// @brief Wyświetla poprzedni element dla danego wskaźnika
+    /// @param p - Indeks elementu
+    void pokaz_poprzedni(elementy *p)       
     {
         if (p && p->poprzedni) 
         {
@@ -211,7 +243,8 @@ class metody
         }
     }
 
-     void czyszczenie() 
+     /// @brief Czyści listę usuwając wszystkie elemęty
+     void czyszczenie()     
      {
         while (poczatek) 
         {
